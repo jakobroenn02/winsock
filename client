@@ -1,0 +1,15 @@
+// connect 
+
+sockaddr_in clientService;
+clientService.sin_family = AF_INET;
+inetPton(AF_INET, T("127.0.0.1"), &clientService.sin_addr.s_addr);
+clientService.sin_port = htons(port);
+if(connect(clientSocket, (SOCKADDR*)&clientService, sizeof(clientService)) == SOCKET_ERROR){
+    std::cout << "Connect failed with error: " << WSAGetLastError() << std::endl;
+    closesocket(clientSocket);
+    WSACleanup();
+    return 1;
+}
+else{
+    std::cout << "Connected" << std::endl;
+}
